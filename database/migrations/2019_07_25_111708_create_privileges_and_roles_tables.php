@@ -20,14 +20,9 @@ class CreatePrivilegesAndRolesTables extends Migration
             $table->timestamps();
         });
         Schema::create('roles', function (Blueprint $table) {
-            $table->Increments('id');
-            $table->string('role_name')->comment('admin,supervisor,clerk');
+            $table->unsignedInteger('id')->autoIncrement();
+            $table->string('role_name')->unique()->comment('admin,supervisor,clerk');
             $table->string('role_code');
-            $table->unsignedInteger('privilege_id');
-            $table->foreign('privilege_id')
-                ->references('id')
-                ->on('privileges')
-                ->onDelete('cascade');
             $table->timestamps();
         });
     }
