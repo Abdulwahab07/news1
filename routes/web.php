@@ -14,6 +14,16 @@
 Route::get('/', function () {
     return view('welcome');
 });
+/*
+Route::get('/control_panel', function () {
+    return view('new_temp.temp_index');
+});
+*/
+
+Route::get('/control_panel', 'PanelController@index')->name('c_panel.index');
+Route::post('/customer', 'CustomerController@store')->name('customer.store');
+Route::get('/customer', 'CustomerController@index')->name('customer.index');
+Route::get('/user_registration', 'Auth\RegisterController@index')->name('auth.register');
 
 Auth::routes();
 
@@ -26,3 +36,5 @@ Route::get('/home', 'HomeController@index')->name('home');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+

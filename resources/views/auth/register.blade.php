@@ -1,9 +1,11 @@
-@extends('layouts.app')
+@extends('cpanel.c_panel')
+
+@section('title',__('registration'))
 
 @section('content')
-<div class="container">
+<div class="container" style="padding-top:10px;">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-10">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
 
@@ -74,4 +76,5 @@
         </div>
     </div>
 </div>
+
 @endsection
