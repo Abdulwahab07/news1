@@ -17,10 +17,10 @@ class AddColumnsToUsers extends Migration
             $table->string('id_number',10)->default('1000000000');
             $table->string('mobile_no',10)->default('05XXXXXXXX');
             $table->string('address',100)->nullable();
-            $table->unsignedInteger('role_id')->nullable();
+          /*  $table->unsignedInteger('role_id')->nullable();
             $table->foreign('role_id')
                 ->references('id')
-                ->on('roles');
+                ->on('roles');*/
         });
     }
 

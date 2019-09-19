@@ -10,7 +10,8 @@
                 <div class="card">
                     <div class="card-header">{{ __('Customer Form') }}</div>
 
-                    <div class="card-body">
+                        @can('product-create')
+                        <div class="card-body">
                         <form method="POST" action="{{ route('customer.store') }}">
                             @csrf
 
@@ -112,6 +113,11 @@
                             </div>
                         </form>
                     </div>
+
+                        @else
+                        @include('_parital._access_denied')
+                        @endcan
+
                 </div>
                 <div class="card mt-4">
                     <div class="card-header">
@@ -127,6 +133,7 @@
                     <div class="card-body">
 
                             <table class="table">
+                                @if($customers != '0')
                                 @foreach($customers as $customer)
                                     <tr class="clickable" data-action="{{route('c_panel.index')}}">
                                     <td class="text-md-center" width="30%">{{$customer->customer_full_name}}</td>
@@ -135,6 +142,9 @@
                                     <td class="text-md-center" width="20%">{{$customer->favoraited_contact_method}}</td>
                                     </tr>
                                 @endforeach
+                                    @else
+                                    @include('_parital._access_denied')
+                                 @endif
                             </table>
 
 

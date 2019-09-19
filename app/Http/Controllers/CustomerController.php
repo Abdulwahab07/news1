@@ -5,7 +5,11 @@ namespace App\Http\Controllers;
 use App\Customer;
 use App\Contact_method;
 use App\User;
+use App\Role;
+use App\Privilege;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 
 class CustomerController extends Controller
 {
@@ -22,8 +26,22 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        $contact_methods = Contact_method::all()->pluck('contact_method','id');
-        $customers = Customer::Select('customer_full_name','contact_number','working_at','favoraited_contact_method')->get();
+     //   $role_id = Auth::user()->role->id;
+        $priv = Privilege::select('id')->where('privilege_name','Write');
+     //   if( Auth::user()->role->role_name == 'Administrator')
+     //   {
+            $contact_methods = Contact_method::all()->pluck('contact_method','id');
+     //   }else{
+          //  $contact_methods = 0 ;
+    //    }
+
+
+     //   if (Auth::user()->role->role_name == 'Supervisor')
+     //   {
+            $customers = Customer::Select('customer_full_name', 'contact_number', 'working_at', 'favoraited_contact_method')->get();
+     //   }else{
+     //       $customers = 0 ;
+     //   }
 
 
       //  dd($contact_methods);
@@ -49,7 +67,9 @@ class CustomerController extends Controller
     public function store(Request $request)
     {
        // dd($request->all());
-
+        if(Auth::id() != '1'){
+            abort(401);
+        }
        $customer = Customer::create($request->all());
       /*  $customer->customer_full_name = $request['customer_full_name'];
         $customer->customer_address = $request['customer_address'];
